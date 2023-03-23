@@ -1,0 +1,812 @@
+{
+	"info": {
+		"_postman_id": "70451407-47df-438c-afba-2a0a0295ed77",
+		"name": "ApiBankError",
+		"description": "Esta collection tem por objetivo consultar, aletrar e acrescentar dados.... ??????",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26460640"
+	},
+	"item": [
+		{
+			"name": "List",
+			"item": [
+				{
+					"name": "1 List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseSchema = {\r",
+									"              \"type\": \"array\",\r",
+									"                \"items\": {\r",
+									"                \"type\": \"object\",\r",
+									"                \"properties\": {\r",
+									"                    \"id\": {\r",
+									"                        \"type\": \"number\"\r",
+									"                    },\r",
+									"                    \"banco\": {\r",
+									"                        \"type\": \"string\"\r",
+									"                    },\r",
+									"                    \"estadoAtuacao\": {\r",
+									"                        \"type\": \"string\"\r",
+									"                    },\r",
+									"                    \"juros\": {\r",
+									"                        \"type\": \"string\"\r",
+									"                    }\r",
+									"                    \r",
+									"                    \r",
+									"                }\r",
+									"                }       \r",
+									"}\r",
+									"\r",
+									"// Respostas dos dados tipo json\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"// Testar a estrutura de dados de resposta\r",
+									"pm.test('Validação da estrutura do JSON', function () {\r",
+									"    var validation = tv4.validate(jsonData, responseSchema);\r",
+									"    pm.expect(validation).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//O teste é bem simples, estou utilizando a biblioteca tv4 para fazer a validação. Basicamente o que fazemos é salvar a resposta que recebemos em uma variável e depois utilizar a biblioteca para verificar se a resposta obedece o esquema que esperamos."
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/bank",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bank"
+							]
+						},
+						"description": "Lista todos os bancos."
+					},
+					"response": []
+				},
+				{
+					"name": "2 List full params",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Quando confirmar todos os parametros, Então devo ter o código 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/bank",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bank"
+							]
+						},
+						"description": "Lista dos parâmetros obrigatórios"
+					},
+					"response": []
+				},
+				{
+					"name": "3 List with id param",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//verificar se é 200 status code, se tem body e se o body é um json\r",
+									"pm.test(\"Status code, body e json ok, \", function () {\r",
+									"     pm.response.to.be.ok;\r",
+									"     pm.response.to.be.withBody;\r",
+									"     pm.response.to.be.json;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/bank?id=2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bank"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						},
+						"description": "Lista os bancos por ID."
+					},
+					"response": []
+				},
+				{
+					"name": "4 List with id error param",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Quando listar por id inexistente, Então devo ter o código 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/bank?id=99",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bank"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "99"
+								}
+							]
+						},
+						"description": "Lista os bancos por ID."
+					},
+					"response": []
+				},
+				{
+					"name": "5 List with banco param",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//verificar se é 200 status code, se tem body e se o body é um json\r",
+									"pm.test(\"Status code, body e json ok, \", function () {\r",
+									"     pm.response.to.be.ok;\r",
+									"     pm.response.to.be.withBody;\r",
+									"     pm.response.to.be.json;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/bank?banco=Nubank",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bank"
+							],
+							"query": [
+								{
+									"key": "banco",
+									"value": "Nubank"
+								}
+							]
+						},
+						"description": "Lista o banco por nome"
+					},
+					"response": []
+				},
+				{
+					"name": "6 List with banco error param",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Quando listar por nome de banco inexistente, então devo ter o código 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/bank?banco=teste",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bank"
+							],
+							"query": [
+								{
+									"key": "banco",
+									"value": "teste"
+								}
+							]
+						},
+						"description": "Lista o banco por nome"
+					},
+					"response": []
+				},
+				{
+					"name": "7 List with estadoAtuacao param",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//verificar se é 200 status code, se tem body e se o body é um json\r",
+									"pm.test(\"Status code, body e json ok, \", function () {\r",
+									"     pm.response.to.be.ok;\r",
+									"     pm.response.to.be.withBody;\r",
+									"     pm.response.to.be.json;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/bank?estadoAtuacao",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bank"
+							],
+							"query": [
+								{
+									"key": "estadoAtuacao",
+									"value": null
+								}
+							]
+						},
+						"description": "Lista o banco por estado brasileiro de atuação."
+					},
+					"response": []
+				},
+				{
+					"name": "8 List with estadoAtuacao error param",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Quando listar por estado de atuação inexistente, então devo ter o código 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/bank?estadoAtuacao=PE",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bank"
+							],
+							"query": [
+								{
+									"key": "estadoAtuacao",
+									"value": "PE"
+								}
+							]
+						},
+						"description": "Lista o banco por estado brasileiro de atuação."
+					},
+					"response": []
+				},
+				{
+					"name": "9 List with juros param",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//verificar se é 200 status code, se tem body e se o body é um json\r",
+									"pm.test(\"Status code, body e json ok, \", function () {\r",
+									"     pm.response.to.be.ok;\r",
+									"     pm.response.to.be.withBody;\r",
+									"     pm.response.to.be.json;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/bank?juros=11,25",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bank"
+							],
+							"query": [
+								{
+									"key": "juros",
+									"value": "11,25"
+								}
+							]
+						},
+						"description": "Lista o banco por juros."
+					},
+					"response": []
+				},
+				{
+					"name": "10 List with juros error param",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Quando listar por juros inexistente, então devo ter o código 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/bank?juros=99,99",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bank"
+							],
+							"query": [
+								{
+									"key": "juros",
+									"value": "99,99"
+								}
+							]
+						},
+						"description": "Lista o banco por juros."
+					},
+					"response": []
+				},
+				{
+					"name": "11 List with juros and estadoAtuacao param",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Quando verificar o juros e o estado de atuação corretos \", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"SC\" , \"11,25%\");\r",
+									"});\r",
+									"\r",
+									"//verificar se é 200 status code, se tem body e se o body é um json\r",
+									"pm.test(\"rStatus code, body e json ok, \", function () {\r",
+									"     pm.response.to.be.ok;\r",
+									"     pm.response.to.be.withBody;\r",
+									"     pm.response.to.be.json;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/bank?juros=11,25&estadoAtuacao=SC",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bank"
+							],
+							"query": [
+								{
+									"key": "juros",
+									"value": "11,25"
+								},
+								{
+									"key": "estadoAtuacao",
+									"value": "SC"
+								}
+							]
+						},
+						"description": "Lista o banco por juros e estadop de atuação."
+					},
+					"response": []
+				},
+				{
+					"name": "12 List with juros and estadoAtuacao error param",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Quando verificar o juros e o estado de atuaçao inexistentes, verificar o status code 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/bank?juros=11,25&estadoAtucao=PE",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bank"
+							],
+							"query": [
+								{
+									"key": "juros",
+									"value": "11,25"
+								},
+								{
+									"key": "estadoAtucao",
+									"value": "PE"
+								}
+							]
+						},
+						"description": "Lista o banco por juros e estadop de atuação."
+					},
+					"response": []
+				},
+				{
+					"name": "13 List with juros com porcentagem error param",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Teste de status de resposta\r",
+									"pm.test(\"Status de resposta deve ser 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"// Teste de tipo de conteúdo\r",
+									"pm.test(\"O tipo de conteúdo deve ser JSON\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"application/json; charset=utf-8\");\r",
+									"});\r",
+									"\r",
+									"// Teste de corpo de resposta\r",
+									"pm.test(\"O corpo de resposta deve conter a chave 'error'\", function () {\r",
+									"    pm.response.to.have.jsonBody(\"error\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"O nome do erro deve ser URIError\", function () {\r",
+									"    pm.expect(pm.response.json().error.name).to.eql(\"URIError\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"A mensagem do erro deve ser 'The provided request parameter is invalid. Please sanitize the parameter before trying again.'\", function () {\r",
+									"    pm.expect(pm.response.json().error.message).to.eql(\"The provided request parameter is invalid. Please sanitize the parameter before trying again.\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"O parâmetro inválido deve ser '11.25%'\", function () {\r",
+									"    pm.expect(pm.response.json().error.details.param).to.eql(\"11.25%\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/bank?jurros=11,25%",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bank"
+							],
+							"query": [
+								{
+									"key": "jurros",
+									"value": "11,25%"
+								}
+							]
+						},
+						"description": "Lista o banco por juros e estadop de atuação."
+					},
+					"response": []
+				}
+			],
+			"description": "Nesta collection contém todas as listas de acesso do banco."
+		},
+		{
+			"name": "Update",
+			"item": [
+				{
+					"name": "14 Update bank",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Quando verificar os dados corretos \", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"SP\" , \"15,00%\", 1, \"Banco do Brasil\" );\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Retorno da mensagem de sucesso correta\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData[0].mensagem).to.eql(\"Registro alterado com sucesso!\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status de resposta correto 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1, \r\n    \"banco\": \"Banco do Brasil\",\r\n    \"estadoAtuacao\": \"SP\",\r\n    \"juros\": \"15,00%\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/bank",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bank"
+							]
+						},
+						"description": "Faz alteração em um banco existente pelo ID."
+					},
+					"response": []
+				},
+				{
+					"name": "15 Update bank erro",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status de resposta correto 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"banco\": \"Banco teste\",\r\n    \"estadoAtuacao\": \"PE\",\r\n    \"juros\": \"1,00%\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/bank",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bank"
+							]
+						},
+						"description": "Erro de alteração de banco pois o ID não existe"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Create",
+			"item": [
+				{
+					"name": "16 Create a new bank",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Teste do status code\r",
+									"pm.test(\"Status code é 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"pm.test(\"Verifica se retorna um array\", function () {\r",
+									"  var jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData).to.be.an(\"array\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Quando verificar os dados corretos \", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"SC\" , \"10,00%\", \"Banco Teste\" );\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"banco\": \"TESTEBanco Teste\",\r\n    \"estadoAtuacao\": \"SC\",\r\n    \"juros\": \"10,00%\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/bank",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bank"
+							]
+						},
+						"description": "Adiciona um novo banco com os parâmetros corretos."
+					},
+					"response": []
+				},
+				{
+					"name": "17 Create a new bank error",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Teste do status code\r",
+									"pm.test(\"Status code é 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"pm.test(\"Verifica se retorna um array\", function () {\r",
+									"  var jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData).to.be.an(\"array\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Quando verificar os dados corretos \", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"PE\" , \"1,00%\", \"Banco NOVO\" );\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"banco\": \"Banco NOVO\",\r\n    \"estadoAtuacao\": \"PE\",\r\n    \"juros\": \"1,00%\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/bank",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bank"
+							]
+						},
+						"description": "Erro, não deve adicionar nada ao banco pois falta paramentros."
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJkZXNhZmlvIjoic2VyYXNhIn0.oOMv4kf9hKMtuatZEZJyESVu9Z7h6hGBwrZRJ-9HkCU\"",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://8dac9f4e-fcb2-4e8f-857a-e4ed3497a0d8.mock.pstmn.io"
+		}
+	]
+}
