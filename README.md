@@ -1,7 +1,10 @@
 <h1 align="center"> API de consulta de bancos por estado de atuação e juros </h1>
 
 
+## Documentos 
+* [Plano de teste](https://github.com/deborahmoura/ApiBank/blob/main/Plano%20de%20testes%20-%20ApiBank.docx.pdf)
 
+* [Bugs](https://github.com/deborahmoura/ApiBank/blob/main/Bugs%20encontrados%20na%20ApiBank.pdf)
 
 
 ## Conceitos de Testes de API
